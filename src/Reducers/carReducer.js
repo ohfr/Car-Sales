@@ -22,11 +22,18 @@ const initialState = {
         case ADD_FEATURE:
              return {
                 ...state,
-                
+                car: {
+                    ...state.car,
+                    features: [
+                        ...state.car.features,
+                        action.payload
+                    ]
+                },
+                additionalPrice: state.additionalPrice + state.car.features.map(cur => cur.price)
              }
         case REMOVE_FEATURE:
             return state.car.features.map((cur, index) => {
-                return  cur.id != action.payload.id;
+                return  cur.id !== action.payload.id;
             })  
         default:
             return state;
